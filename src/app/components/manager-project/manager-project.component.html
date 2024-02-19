@@ -1,0 +1,297 @@
+<div class="container mx-auto">
+    <div class="my-10 w-full flex justify-between items-center">
+        <div class="w-fit">
+            <h2 class="text-2xl uppercase font-extrabold">{{project.name}}</h2>
+            <img class="w-[200px] h-[200px] my-2" [src]="project.image" alt="IMG">
+            <div class="h-[1px] bg-gray-600"></div>
+        </div>
+        <div class="flex justify-start items-center">
+            <div *ngIf="project.status !== 'Unconfirmed'" class="mx-2 flex">
+                <p class="font-bold text-green-600">Confirmed</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+            </div>
+            <div class="w-[22px] h-[1px] bg-gray-600"></div>
+            <div *ngIf="project.status !== 'Processing' && project.status === 'Confirmed'" class="mx-2 flex">
+                <p class="font-bold text-gray-500">Processing</p>
+            </div>
+            <div *ngIf="project.status === 'Processing' || project.status === 'Complete'" class="mx-2 flex">
+                <p class="font-bold text-green-600">Processing</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>   
+            </div>
+            <div class="w-[22px] h-[1px] bg-gray-600"></div>
+            <div *ngIf="project.status !== 'Complete' && project.status === 'Confirmed'" class="mx-2">
+                <div class="">   
+                    <p class="font-bold text-gray-500">Complete</p>
+                </div>
+            </div>
+            <div *ngIf="project.status !== 'Complete'" class="mx-2">
+                <div class="">   
+                    <a *ngIf="project.status === 'Processing'" (click)="completeProject(project._id)" class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+                    <span
+                        class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                    <span class="relative">Complete Project</span>
+                </a>
+                </div>
+            </div>
+            <div *ngIf="project.status === 'Complete'" class="mx-2 flex items-center">
+                <p class="font-bold text-green-600">Complete</p>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>  
+            </div>
+        </div>
+    </div>
+    <div class="my-2">
+        <div>
+            <h2 class="text-xl font-bold">Project Description</h2>
+            <p class="mt-4 text-gray-500 font-serif">{{project.description}}</p>
+        </div>
+    </div>
+    <div class="h-[1px] bg-gray-600 my-5"></div>
+    <div class="grid grid-cols-2 gap-2">
+        <div class="col-span-1">
+            <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+                  </svg>
+                <h3 class="text-gray-500 ml-2 font-semibold">Detail Project</h3>
+            </div>
+            <div class="p-3 my-4 w-[50%] rounded-xl border-l-4 border-gray-200 bg-yellow-400 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+                <div class="flex justify-start items-center text-white">
+                    <span>Start Time:</span>
+                    <span class="ml-2 underline">{{project.start_time | date:'dd/MM/yyyy'}}</span>
+                </div>
+            </div>
+            <div class="p-3 my-4 w-[50%] rounded-xl bg-green-400 border-l-4 border-gray-200 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+                <div class="flex justify-start items-center text-white">
+                    <span>End Time:</span>
+                    <span class="ml-2 underline">{{project.end_time | date:'dd/MM/yyyy'}}</span>
+                </div>
+            </div>
+            <div class="p-3 my-4 w-[50%] rounded-xl border-l-4 border-gray-200 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+                <div class="flex justify-start items-center text-gray-700">
+                    <span>Expense:</span>
+                    <span class="ml-2 underline">{{project.expense | number:'1.0-0'}} $</span>
+                </div>
+            </div>
+            <div class="p-3 my-4 w-[50%] rounded-xl border-l-4 border-gray-200 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+                <div class="flex justify-start items-center text-gray-700">
+                    <span>Progess:</span>
+                    <!-- <div class="flex p-3 my-4 w-[50%] items-center justify-center"> -->
+                        <!-- <svg class="w-[200px] h-[200px]" viewBox="0 0 36 36">
+                          <path class="stroke-gray-200" stroke-width="2" d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />
+                          <path class="text-green-500 stroke-current" [attr.stroke-width]="2" [attr.stroke-dasharray]="completedTasks / tasks.length* 100 + ' 100'" d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831" />     
+                        </svg> -->
+                        <!-- <svg class="w-[208px] h-[208px] svg-donut">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <circle class="donut" stroke-dasharray="500,900" stroke="#FF3B30" stroke-width="2" stroke-linecap="round" transform="translate(103.000000, 103.000000) scale(1, -1) translate(-103.000000, -103.000000) " cx="103" cy="103" r="100"></circle>
+                            </g>
+                        </svg> -->
+                        <div class="flex justify-center items-center ml-3">
+                          <div class="text-green-600 font-bold">{{ tasks.length > 0 ? (completedTasks / tasks.length * 100) : 0 }}%</div>
+                          <div class="font-bold text-red-600 ml-3 ">/ 100% Task Complete</div>
+                        </div>
+                      <!-- </div> -->
+                </div>
+            </div>
+            <div class="p-3 my-4 w-[50%] rounded-xl border-l-4 border-gray-200 shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px]">
+                <div class="flex justify-start items-center text-gray-700">
+                    <span>Total Task:</span>
+                    <span class="ml-2 font-bold">{{tasks.length}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-span-1 relative">
+            <div class="flex">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                  </svg>
+                  <h3 class="text-gray-500 ml-2 font-semibold">Members({{listMember.length}})</h3>
+            </div>
+            <div>
+                @for (member of listMember; track $index) {
+                <div class="my-5 flex justify-start items-center ">
+                    <img class="w-[50px] h-[50px]" [src]="member.image_url" [alt]="member.image_url">
+                    <p class="ml-4 text-gray-500 w-[100px] ">{{member.name}}</p>
+                    <p class="ml-4 text-gray-900 w-[150px] font-bold">{{member.department}}</p>
+                    <div (click)="kickMemberFromProject(projectId, member._id)" class="">
+                        <a *ngIf="project.status !== 'Complete'"
+                        class="rounded relative inline-flex group items-center justify-center px-2.5 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-red-600 active:shadow-none shadow-lg bg-gradient-to-tr from-red-600 to-red-500 border-red-700 text-white">
+                        <span
+                            class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-fit opacity-10"></span>
+                        <span class="relative">Out Project</span>
+                    </a>
+                </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div *ngIf="project.status !== 'Complete'" class="my-5">
+        <div class="flex justify-start items-center ">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+              </svg>
+              <h3 class="text-xl ml-3 font-semibold">Add Member To Project</h3>
+        </div>
+        <div class="container shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-xl overflow-hidden my-5">
+            <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Image
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Role
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Department
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Status
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                       
+                    </th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (user of users; track $index) {
+                <tr class="bg-white border-b">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                       <img class="w-[50px] h-[50px]" [src]="user.image_url" [alt]="user.name">
+                    </th>
+                    <td class="px-6 py-4">
+                       {{user.name}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{user.role}}
+                     </td>
+                     <td class="px-6 py-4">
+                        {{user.department}}
+                     </td>
+                     <td class="px-6 py-4">
+                        <div *ngIf="user.status ==='Working' || user.status === 'Ready'" class="p-2 w-fit text-center bg-green-500 rounded-md">
+                            <p class="text-white font-bold">Ready</p>
+                        </div>
+                        <div *ngIf="user.status === 'Busy'" class="p-2 w-fit text-center bg-red-500 rounded-md">
+                            <p class="text-white font-bold">Busy</p>
+                        </div>
+                     </td>
+                    <td class="px-6 py-4">
+                        <div *ngIf="user.status === 'Working' || user.status === 'Ready'">
+                        <a  (click)="addMemberToProject(user._id)"
+                        class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-blue-600 active:shadow-none shadow-lg bg-gradient-to-tr from-blue-600 to-blue-500 border-blue-700 text-white">
+                        <span
+                            class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-fit opacity-10"></span>
+                        <span class="relative">Join</span>
+                    </a>
+                </div>
+                <div *ngIf="user.status === 'Busy'">
+                    <a 
+                    class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-not-allowed border-b-4 border-l-2 disabled active:border-gray-600 active:shadow-none shadow-lg bg-gradient-to-tr from-gray-600 to-gray-500 border-gray-700 text-white">
+                    <span
+                        class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-fit opacity-10"></span>
+                    <span class="relative">Join</span>
+                </a>
+            </div>
+                    </td>
+                }
+            </tbody>
+            </table>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="container mt-10 mx-auto mb-[500px]">
+    <div class="my-5 w-full h-[1px] bg-black"></div>
+    <div class="w-fit my-5">
+        <h2 class="text-2xl uppercase font-extrabold">Task</h2>
+        <div class="h-[1px] bg-gray-600"></div>
+    </div>
+    <a *ngIf="project.status !== 'Complete'" (click)="openAddTaskModal()"
+                        class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-blue-600 active:shadow-none shadow-lg bg-gradient-to-tr from-blue-600 to-blue-500 border-blue-700 text-white">
+                        <span
+                            class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-fit opacity-10"></span>
+                        <span class="relative">Add Task</span>
+                    </a>
+    <div class=" shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-xl overflow-hidden my-5">
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 ">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Member Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name Task
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            DeadLine
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (task of tasks; track $index) {
+                    <tr class="bg-white border-b">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {{task.account_id.name}}
+                        </th>
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {{task.name}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{task.dead_line | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <div *ngIf="task.status === 'Wait to Confirmed'" class="p-2 bg-yellow-500 w-fit rounded-lg">
+                                <p class="text-white font-bold">{{task.status}}</p>
+                            </div>
+                            <div *ngIf="task.status === 'Processing'" class="p-2 bg-red-500 w-fit rounded-lg">
+                                <p class="text-white font-bold">{{task.status}}</p>
+                            </div>
+                            <div *ngIf="task.status === 'Complete'" class="p-2 bg-green-500 w-fit rounded-lg">
+                                <p class="text-white font-bold">{{task.status}}</p>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 flex items-center">
+                            <a *ngIf="task.status === 'Wait to Confirmed'" (click)="confirmSuccessTask(task._id)" class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+                                <span
+                                    class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32  opacity-10"></span>
+                                <span class="relative">Confirm Success</span>
+                            </a>
+                            <a (click)="openSwapTaskModal(task._id , task.account_id._id)" *ngIf="task.status !== 'Complete'" class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+                                <span
+                                    class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32  opacity-10"></span>
+                                <span class="relative">Task Delegation</span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<app-add-task [projectId]="projectId" *ngIf="openAddTask" (closeModalEvent)="closeAddTaskModal()" ></app-add-task>
+<app-modal-swap-task [taskId]="taskId" [projectId]="projectId" [oldEmployeeId]="oldEmployeeId" *ngIf="openSwapTask" (closeModalEvent)="closeSwapTaskModal()" ></app-modal-swap-task>

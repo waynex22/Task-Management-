@@ -1,0 +1,104 @@
+<div class="container mx-auto">
+    <div class="my-10">
+        <h1 class="uppercase font-bold text-3xl ">Member</h1>
+    </div>
+    <div class="grid grid-cols-3 gap-4 ">
+        <div class="col-span-1 text-center shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-xl p-2">
+            <h1 class="uppercase text-xl font-bold my-2">User</h1>
+            <div class="h-[1px] w-[30%] mx-auto bg-green-600"></div>
+            <div class="flex justify-center items-center my-2 text-green-500 text-2xl font-bold">
+                {{users.length}}
+            </div>
+        </div>
+        <div class="col-span-1 text-center shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-xl p-2">
+            <h1 class="uppercase text-xl font-bold my-2">Leader</h1>
+            <div class="h-[1px] w-[30%] mx-auto bg-red-600"></div>
+            <div class="flex justify-center items-center my-2 text-red-500 text-2xl font-bold">
+                {{countLeader}}
+            </div>
+        </div>
+        <a routerLink="/add-account">
+            <div
+                class="col-span-1 text-center shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] bg-green-500 hover:bg-green-400 hover:cursor-zoom-in rounded-xl p-2">
+                <div class="flex flex-col justify-center items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-10 h-10 text-white">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    <h1 class="uppercase text-xl font-bold text-white my-2">New Account</h1>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class=" shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-xl overflow-hidden my-5">
+        <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Avatar
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Email
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Join At
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Role
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Department
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (user of users; track $index) {
+                    <tr class="bg-white border-b">
+                        <td class="px-6 py-4">
+                            <img class="h-[50px] w-[50px]" [src]="user.image_url" [alt]="user.name">
+                        </td>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {{user.name}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{user.email}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{user.createdAt | date:'dd/MM/yyyy'}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <p *ngIf="user.role === 'Leader'" class="text-orange-500 font-bold">{{user.role}}</p>
+                            <p *ngIf="user.role === 'Employee'" class="text-yellow-500 font-bold">{{user.role}}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="text-gray-600 font-bold">{{user.department}}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p *ngIf="user.status !== 'Off'" class="text-green-500 font-bold">Working</p>
+                            <p *ngIf="user.status === 'Off'" class="text-red-500 font-bold">Off</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a routerLink="/edit-account/{{user._id}}"
+                                class="rounded relative inline-flex group items-center justify-center px-2.5 py-1.5 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+                                <span
+                                    class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-22 group-hover:h-22 opacity-40"></span>
+                                <span class="relative">Edit</span>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

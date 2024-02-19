@@ -1,0 +1,46 @@
+<div class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <!-- Background overlay -->
+      <div class="fixed inset-0 transition-opacity">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+  
+      <!-- Modal panel -->
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button (click)="closeModal()" type="button" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring focus:border-blue-300 sm:text-sm sm:leading-5">
+            Close
+          </button>
+        </div>
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <h2 class="text-xl text-red-600">
+            Change Password
+          </h2>
+          <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="my-2 ">
+              <div class="col-span-2">
+                <label for="password" class="block text-sm font-medium text-gray-600">Current Password</label>
+                <input type="password" formControlName="password" id="password" name="password" [(ngModel)]="data.password" class="mt-1 p-2 w-full border rounded">
+              </div>
+              <div class="col-span-1">
+                <label for="newPassword" class="block text-sm font-medium text-gray-600">New Password</label>
+                <input type="password" formControlName="newPassword" id="newPassword" name="newPassword" [(ngModel)]="data.newPassword"
+                  class="mt-1 p-2 w-full border rounded">
+                  
+              </div>
+            </div>
+            
+            <button type="submit">
+              <a
+                class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-blue-600 active:shadow-none shadow-lg bg-gradient-to-tr from-blue-600 to-blue-500 border-blue-700 text-white">
+                <span
+                  class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+                <span class="relative">Change Password</span>
+              </a>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

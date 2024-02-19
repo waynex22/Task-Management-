@@ -1,0 +1,23 @@
+<nav class=" flex flex-wrap items-center justify-between px-2 py-3 bg-white mb-3">
+  <div class="my-4">
+    X22 TEAM
+  </div>
+<div class="flex items-center gap-4 mr-4">
+  <img (click)="openModal()" class="w-10 h-10 cursor-pointer" src="{{user.image_url}}" alt="">
+  <div class="font-medium">
+      <p>{{user.name}}</p>
+      <div class="text-sm text-gray-500">{{user.role}}</div>
+  </div>
+  <div (click)="logout()" class="cursor-pointer">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 hover:text-red-500">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+    </svg>
+  </div>
+</div>
+<div class="w-full h-[1px] bg-gray-900"></div>  
+</nav>
+<div class="fixed">
+  <app-modal-change-pass *ngIf="isModalOpen" (closeModalEvent)="closeModal()"></app-modal-change-pass>
+</div>
+
+

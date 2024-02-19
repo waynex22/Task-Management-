@@ -1,0 +1,36 @@
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-fixed bg-center bg-no-repeat" style="background-image:url('https://4kwallpapers.com/images/wallpapers/macos-big-sur-colorful-waves-smooth-stock-apple-aesthetic-5k-2560x1440-1495.jpg')">
+    <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+      <div class="text-white">
+        <div class="mb-8 flex flex-col items-center">
+          <img src="https://resources.mynewsdesk.com/image/upload/ar_16:9,c_fill,dpr_auto,f_auto,g_auto,q_auto:good,w_1782/ny0r666fazxze53zidfv" width="150" alt="" srcset="" />
+          <h1 class="mb-2 text-2xl">Login</h1>
+        </div>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <div class="mb-4 text-lg">
+            <input class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                   type="text" formControlName="email" placeholder="id@email.com" [(ngModel)]="credentials.email"/>
+            <div *ngIf="myForm.get('email')?.hasError('required') && myForm.get('email')?.touched">
+              Email is required.
+            </div>
+            <div *ngIf="myForm.get('email')?.hasError('email') && myForm.get('email')?.touched">
+              Please enter a valid email address.
+            </div>
+          </div>
+        
+          <div class="mb-4 text-lg">
+            <input class="rounded-3xl border-none bg-gray-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                   type="password" formControlName="password" placeholder="*********" [(ngModel)]="credentials.password"/>
+            <div *ngIf="myForm.get('password')?.hasError('required') && myForm.get('password')?.touched">
+              Password is required.
+            </div>
+            <div *ngIf="myForm.get('password')?.hasError('minlength') && myForm.get('password')?.touched">
+              least 6 characters long.
+            </div>
+          </div>
+          <div class="mt-8 flex justify-center text-lg text-black">
+            <button class="rounded-3xl bg-gray-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:underline">Login</button>
+          </div>
+        </form>
+        <p class="text-center my-4 font-bold text-white text-md">{{message}}</p>
+    </div>
+  </div>

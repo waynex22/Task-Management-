@@ -1,0 +1,77 @@
+<div class="container mx-auto">
+  <div class="my-10">
+    <h1 class="uppercase font-bold text-3xl ">New Project</h1>
+  </div>
+  <div class="my-10">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <div class="my-2 grid grid-cols-3 gap-4">
+        <div class="col-span-2">
+          <label for="name" class="block text-sm font-medium text-gray-600">Project Name</label>
+          <input type="text" formControlName="name" id="name" name="name" [(ngModel)]="project.name" class="mt-1 p-2 w-full border rounded">
+          <div class="text-red-600" *ngIf="myForm.get('name')?.hasError('required') && myForm.get('name')?.touched">
+            Name project is required.
+          </div>
+        </div>
+        <div class="col-span-1">
+          <label for="expense" class="block text-sm font-medium text-gray-600">Expense</label>
+          <input type="number" formControlName="expense" id="expense" name="expense" [(ngModel)]="project.expense"
+            class="mt-1 p-2 w-full border rounded">
+            <div class="text-red-600" *ngIf="myForm.get('expense')?.hasError('required') && myForm.get('expense')?.touched">
+              Expense project is required.
+            </div>
+        </div>
+      </div>
+      <div class="col-span-1">
+        <label for="image" class="block text-sm font-medium text-gray-600">Image URL</label>
+        <input type="text" formControlName="image" id="image" name="image" [(ngModel)]="project.image"
+          class="mt-1 p-2 w-full border rounded">
+          <div class="text-red-600" *ngIf="myForm.get('image')?.hasError('required') && myForm.get('image')?.touched">
+            Image project is required.
+          </div>
+      </div>
+      <div class="col-span-1">
+        <label for="sub_description" class="block text-sm font-medium text-gray-600">Sub Description</label>
+        <input type="text" formControlName="sub_description" id="sub_description" name="sub_description" [(ngModel)]="project.sub_description"
+          class="mt-1 p-2 w-full border rounded">
+          <div class="text-red-600" *ngIf="myForm.get('sub_description')?.hasError('required') && myForm.get('sub_description')?.touched">
+            Sub Description project is required.
+          </div>
+      </div>
+      <div class="my-2">
+        <label for="description" class="block text-sm font-medium text-gray-600">Project Description</label>
+        <textarea id="description" formControlName="description" name="description" [(ngModel)]="project.description" class="mt-1 p-2 w-full border rounded"></textarea>
+      </div>
+      <div class="text-red-600" *ngIf="myForm.get('description')?.hasError('required') && myForm.get('description')?.touched">
+        Description project is required.
+      </div>
+      <div class="my-2 flex justify-start items-center">
+        <div class="mb-4">
+          <label for="startTime" class="block text-sm font-medium text-gray-600">Start Time</label>
+          <input type="date" formControlName="start_time" id="startTime" name="startTime" [(ngModel)]="project.start_time"
+            class="mt-1 p-2 w-full border rounded">
+        </div>
+        <div class="text-red-600" *ngIf="myForm.get('start_time')?.hasError('required') && myForm.get('start_time')?.touched">
+          Start Time project is required.
+        </div>
+        <div class="mb-4 ml-5">
+          <label for="endTime" class="block text-sm font-medium text-gray-600">End Time</label>
+          <input type="date" id="endTime" formControlName="end_time" name="endTime" [(ngModel)]="project.end_time"
+            class="mt-1 p-2 w-full border rounded">
+        </div>
+        <div class="text-red-600" *ngIf="myForm.get('end_time')?.hasError('required') && myForm.get('end_time')?.touched">
+          End Time project is required.
+        </div>
+      </div>
+      <div class="text-red-600 font-bold" *ngIf="myForm.hasError('dates')">
+        Start date should be less than end date
+      </div>
+      <button type="submit">
+        <a
+          class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-blue-600 active:shadow-none shadow-lg bg-gradient-to-tr from-blue-600 to-blue-500 border-blue-700 text-white">
+          <span
+            class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+          <span class="relative">Create Project</span>
+        </a>
+      </button>
+    </form>
+  </div>

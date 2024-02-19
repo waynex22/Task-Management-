@@ -1,0 +1,10 @@
+.svg-donut {
+    transform: scaleX(-1) rotate(-90deg);
+  }
+  .donut {
+    animation: donut 3s;
+  }
+  @keyframes donut {
+    0% { stroke-dasharray: 0, 900; }
+    100% { stroke-dasharray: 500, 900; }
+  }

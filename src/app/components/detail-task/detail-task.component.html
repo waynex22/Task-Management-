@@ -1,0 +1,48 @@
+<div class="container">
+    <div *ngIf="task && task.project_id">
+        <h3 class="text-2xl my-10 underline uppercase">{{task.project_id.name}}</h3>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="col-span-1">
+                <div class="my-2 flex justify-start items-center">
+                    <p class="text-gray-700 font-semibold">Task Name : </p>
+                    <p class="ml-3">{{task.name}}</p>
+                </div>
+                <div class="my-2 flex justify-start items-center">
+                    <p class="text-gray-700 font-semibold">Status : </p>
+                    <p *ngIf="task.status === 'Processing'" class="ml-3 bg-orange-500 p-1 rounded-md text-white">
+                        {{task.status}}</p>
+                    <p *ngIf="task.status === 'Wait to Confirmed'" class="ml-3 bg-red-500 p-1 rounded-md text-white">
+                        {{task.status}}</p>
+                    <p *ngIf="task.status === 'Complete'" class="ml-3 bg-green-500 p-1 rounded-md text-white">
+                        {{task.status}}</p>
+                </div>
+                <div class="my-2 flex justify-start items-center">
+                    <p class="text-gray-700 font-semibold">Created At : </p>
+                    <p class="ml-3">{{task.createdAt | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="my-2 flex justify-start items-center">
+                    <p class="text-gray-700 font-semibold">Description Task : </p>
+                    <p class="ml-3 text-gray-400">{{task.description}}</p>
+                </div>
+            </div>
+            <div class="col-span-2">
+            </div>
+        </div>
+        <a *ngIf="task.status !== 'Complete' && task.status !== 'Wait to Confirmed'" (click)="completeTask(task._id)"
+            class="rounded disabled relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+            <span class="absolute w-0 h-0 bg-white rounded-full "></span>
+            <span class="relative">Complete Task </span>
+        </a>
+        <a *ngIf="task.status === 'Complete'"
+            class="rounded disabled cursor-not-allowed relative inline-flex group items-center justify-center px-3.5 py-2 m-1  border-b-4 border-l-2 active:border-gray-600 active:shadow-none shadow-lg bg-gradient-to-tr from-gray-600 to-gray-500 border-gray-700 text-white">
+            <span class="absolute w-0 h-0 bg-white rounded-full "></span>
+            <span class="relative">Task is Completed</span>
+        </a>
+        <a *ngIf="task.status === 'Wait to Confirmed'"
+            class="rounded disabled relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 shadow-lg bg-gradient-to-tr from-red-600 to-red-500 border-red-700 text-white">
+            <span class="absolute w-0 h-0 bg-white rounded-full "></span>
+            <span class="relative">Wait to Leader Confirmed </span>
+        </a>
+
+    </div>
+</div>

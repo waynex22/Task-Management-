@@ -1,0 +1,62 @@
+<div class="fixed z-10 inset-0 overflow-y-auto">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!-- Background overlay -->
+    <div class="fixed inset-0 transition-opacity">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+    <div
+      class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-[70%] mx-auto mt-[50px]">
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button (click)="closeModal()" type="button"
+          class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring focus:border-blue-300 sm:text-sm sm:leading-5">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+          
+        </button>
+      </div>
+      <div class="my-10">
+        <h1 class="uppercase font-bold text-3xl ml-10 ">New Task</h1>
+      </div>
+      <div class="my-10 mx-10">
+        <form (ngSubmit)="onSubmit()">
+          <div class="my-2 grid grid-cols-5 gap-4">
+            <div class="col-span-1">
+              <label for="account_id" class="block text-sm font-medium text-gray-600">Assigned To</label>
+              <select id="account_id" name="account_id" [(ngModel)]="task.account_id"
+                class="mt-1 p-2 w-full border rounded">
+                <option *ngFor="let account of members" [value]="account._id">{{ account.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="my-2">
+            <label for="name" class="block text-sm font-medium text-gray-600">Task Name</label>
+            <input id="name" name="name" [(ngModel)]="task.name" class="mt-1 p-2 w-full border rounded">
+          </div>
+          <div class="my-2">
+            <div class="mb-4">
+              <label for="description" class="block text-sm font-medium text-gray-600">Description</label>
+              <textarea type="text" id="description" name="description" [(ngModel)]="task.description"
+                class="mt-1 p-2 w-full border rounded"></textarea>
+            </div>
+          </div>
+          <div class="my-2 w-[30%]">
+            <div class="mb-4">
+              <label for="dead_line" class="block text-sm font-medium text-gray-600">DeadLine</label>
+              <input type="date" id="dead_line" name="dead_line" [(ngModel)]="task.dead_line"
+                class="mt-1 p-2 w-full border rounded">
+            </div>
+          </div>
+          <button type="submit">
+            <a
+              class="rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-blue-600 active:shadow-none shadow-lg bg-gradient-to-tr from-blue-600 to-blue-500 border-blue-700 text-white">
+              <span
+                class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
+              <span class="relative">Create Task</span>
+            </a>
+          </button>
+        </form>
+      </div>
+    </div>
+    </div>
+  </div>
